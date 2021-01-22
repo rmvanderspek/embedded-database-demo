@@ -1,16 +1,14 @@
 package com.github.tomix26.embedded.database.demo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(schema = "test", name = "person")
 public class Person {
 
     @Id
-    private Long id;
+    private UUID id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -18,11 +16,23 @@ public class Person {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    public Long getId() {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id", name = "id")
+    private Transportation transportation;
+
+    public Transportation getTransportation() {
+        return transportation;
+    }
+
+    public void setTransportation(Transportation transportation) {
+        this.transportation = transportation;
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

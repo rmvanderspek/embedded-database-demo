@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +22,7 @@ public class CustomDataJpaAnnotationTest {
 
     @Test
     public void testEmbeddedDatabase() {
-        Optional<Person> personOptional = personRepository.findById(1L);
+        Optional<Person> personOptional = personRepository.findById(UUID.fromString("b5e9fd10-d046-40ee-89e9-15c42f66ed70"));
 
         assertThat(personOptional).hasValueSatisfying(person -> {
             assertThat(person.getId()).isNotNull();
